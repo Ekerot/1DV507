@@ -12,7 +12,7 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-out.production.1DV507
+production
 bin
 .idea
 .settings
@@ -23,3 +23,4 @@ jdjdjd.rtf
 lastyear
 exercise10
 out
+.DS_Store
