@@ -5,13 +5,13 @@ import java.util.Iterator;
 /**
  * An interface representing a queue.
  * It support for enqueue and dequeue object from the queue.
- * <p/>
+ * <p>
  * The class uses a head to tail method.
- * <p/>
+ * <p>
  */
 
 /**
- * Created by Daniel Ekerot on 2016-05-30.
+ * Created by Daniel Ekerot on 2017-02-01.
  */
 
 
@@ -23,7 +23,7 @@ public class LinkedQueue implements IQueue {
 
     /**
      * Constructor for class <code>LinkedQueue</code>
-     * <p/>
+     * <p>
      * <code>size, head, tail</code> initialized
      */
 
@@ -32,7 +32,6 @@ public class LinkedQueue implements IQueue {
         size = 0;
         head = null;
         tail = null;
-
     }
 
     /**
@@ -78,14 +77,13 @@ public class LinkedQueue implements IQueue {
             tail.next = new Node(element);
             tail = tail.next;
         }
-
         size++;
 
     }
 
     /**
      * Method returning and removing the first object in the queue.
-     * <p/>
+     * <p>
      * Throws <code>IlligalArgumentException</code> if the queue is empty.
      *
      * @return Object
@@ -104,12 +102,11 @@ public class LinkedQueue implements IQueue {
         head = head.next;
 
         return temp;
-
     }
 
     /**
      * Method returning the first object in the queue.
-     * <p/>
+     * <p>
      * Throws <code>IlligalArgumentException</code> if the queue is empty.
      *
      * @return Object
@@ -122,14 +119,12 @@ public class LinkedQueue implements IQueue {
             throw new IllegalArgumentException();
 
         }
-
         return head.value;
-
     }
 
     /**
      * Method returning the last object in the queue.
-     * <p/>
+     * <p>
      * Throws <code>IlligalArgumentException</code> if the queue is empty.
      *
      * @return Object
@@ -150,7 +145,7 @@ public class LinkedQueue implements IQueue {
      */
 
     @Override
-    public Iterator iterator() {
+    public Iterator<Object> iterator() {
         return new QueueIterator();
     }
 
@@ -169,10 +164,7 @@ public class LinkedQueue implements IQueue {
             str = str + (current.value).toString() + "\n";
             current = current.next;
         }
-
         return str;
-
-
     }
 
     /**
@@ -188,15 +180,14 @@ public class LinkedQueue implements IQueue {
             value = v;
 
         }
-
     }
 
     /**
      * QueueIterator class implementing Iterator.
      * Using methods hasNext() and next() to iterating the queue.
-     * <p/>
+     * <p>
      * Method remove() not in use.
-     * <p/>
+     * <p>
      * Throws <code>IllegalArgumentException</code>
      */
 
@@ -208,13 +199,12 @@ public class LinkedQueue implements IQueue {
 
             return temp != null;
 
-
         }
 
         public Object next() {
 
             if (isEmpty()) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Something went wrong!");
             }
 
             Object element = temp.value;
@@ -226,8 +216,8 @@ public class LinkedQueue implements IQueue {
 
         /**
          * Method not in use.
-         * <p/>
-         * Throws <code>UnsupportedoperationException</code>
+         * <p>
+         * Throws <code>UnsupportedOperationException</code>
          */
 
         @Override
@@ -235,7 +225,6 @@ public class LinkedQueue implements IQueue {
             throw new UnsupportedOperationException();
 
         }
-
     }
 }
 

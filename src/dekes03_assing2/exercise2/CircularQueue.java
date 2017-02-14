@@ -11,27 +11,25 @@ import java.util.Iterator;
  */
 
 /**
- * Created by Daniel Ekerot on 2016-05-30.
+ * Created by Daniel Ekerot on 2017-02-08.
  */
 
 
-public class CircularArrays implements IQueue {
+public class CircularQueue implements IQueue {
 
-    public Object[] buff;
-    public int read, write;
+    private int maxSize;
+    private Object[] queue;
+    private int first = 0, last = 0, amount = 0;
 
     /**
-     * Constructor for class <code>LinkedQueue</code>
+     * Constructor for class <code>CircularQueue</code>
      * <p/>
-     * <code>size, head, tail</code> initialized
+     * <code>front, rear, max, amount, queue</code> initialized
      */
 
-    public CircularArrays() {
-
-        buff = new Object[100];
-        write = 0;
-        read = 0;
-
+    public CircularQueue() {
+        maxSize = 100;
+        this.queue = new Object[maxSize];
     }
 
     /**
@@ -42,7 +40,8 @@ public class CircularArrays implements IQueue {
 
     @Override
     public int size() {
-        return buff.length;
+
+        return amount;
     }
 
     /**
@@ -53,27 +52,28 @@ public class CircularArrays implements IQueue {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return (amount == 0);
     }
 
     /**
      * Method for adding objects into the queue.
-     * the enqueue method adiing the new object in its proper place in the queue.
+     * the enqueue method adding the new object in its proper place in the queue.
      * Adding new size for every objects added.
      */
 
     @Override
     public void enqueue(Object element) {
 
+        if (last == maxSize)
+            last = 0;
 
-            if ( read == ( write + 1 ) % (buff.length) )
-            {
-                throw new ArrayIndexOutOfBoundsException();
-            }
+        if (first == last && this.isEmpty() == false) {
+            throw new IllegalArgumentException("Array is full!");
+        }
 
-            buff[write] = element;                 // Store x in buf at write pointer
-            write = (write+1)%(buff.length); // Advance the write pointer
-
+        queue[last] = element;
+        amount++;
+        last++;
 
     }
 
@@ -88,20 +88,20 @@ public class CircularArrays implements IQueue {
     @Override
     public Object dequeue() {
 
-        Object r;   // Variable used to save the return value
-
-        if ( read == write ) {
+        if(this.isEmpty()){
+            throw new IllegalArgumentException("Array is Empty!");
         }
 
-        r = buff[read];                 // Save return value
-        read = (read+1)%(buff.length);  // Advance the read pointer
+        Object temp = queue[first];
+        queue[first] = null;
+        amount--;
+        first++;
 
-        return r;
-
+        return temp;
     }
 
     /**
-     * Method returning the first object in the queue.
+     * Method returning the first object in the circular queue.
      * <p/>
      * Throws <code>IlligalArgumentException</code> if the queue is empty.
      *
@@ -111,17 +111,13 @@ public class CircularArrays implements IQueue {
     @Override
     public Object first() throws IllegalArgumentException {
 
-        if (isEmpty()) {
-            throw new IllegalArgumentException();
+        if (isEmpty()) throw new IllegalArgumentException();
 
-        }
-
-        return null;
-
+        return queue[first];
     }
 
     /**
-     * Method returning the last object in the queue.
+     * Method returning the last object in the circular queue.
      * <p/>
      * Throws <code>IlligalArgumentException</code> if the queue is empty.
      *
@@ -133,11 +129,11 @@ public class CircularArrays implements IQueue {
 
         if (isEmpty()) throw new IllegalArgumentException();
 
-        return null;
+        return queue[last-1];
     }
 
     /**
-     * Iterator method returning objects int the queue iterated.
+     * Iterator method returning objects int the circular queue iterated.
      *
      * @return Iterator
      */
@@ -157,25 +153,25 @@ public class CircularArrays implements IQueue {
 
         String str = "";
 
-        return str;
+        for(int i = first; i < queue.length; i++){
+            if(queue[i] == null){
+            }
+            else {
+                str = str + queue[i] + "\n";
+            }
 
-
-    }
-
-    /**
-     * Initializing values in the Node class for use int the LinkedQueue class.
-     */
-
-    private class Node {
-
-        Object value;
-        Node next = null;
-
-        Node(Object v) {
-            value = v;
 
         }
-
+        if(first != 0) {
+            for (int j = 0; j < first; j++) {
+                if(queue[j] == null){
+                }
+                else {
+                    str = str + queue[j] + "\n";
+                }
+            }
+        }
+        return str;
     }
 
     /**
@@ -218,7 +214,6 @@ public class CircularArrays implements IQueue {
             throw new UnsupportedOperationException();
 
         }
-
     }
 }
 

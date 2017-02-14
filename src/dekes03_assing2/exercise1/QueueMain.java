@@ -2,9 +2,6 @@ package dekes03_assing2.exercise1;
 
 import java.util.Iterator;
 
-/**
- * Created by ekerot on 2016-06-11.
- */
 public class QueueMain {
 
     public static void main(String[] args) {
@@ -41,7 +38,5 @@ public class QueueMain {
             System.out.println(o);
 
         }
-
-
     }
 }

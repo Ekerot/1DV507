@@ -12,7 +12,7 @@ public class PrintJavaMain {
 
         try {
             // read in the path that we want to check for .java files
-            File path = new File("/Users/ekerot/Documents/workspace/");
+            File path = new File("/Users/ekerot/Documents/1DV543");
 
             printAllJavaFiles(path);
 
@@ -26,24 +26,31 @@ public class PrintJavaMain {
 
         File[] fileList = directory.listFiles();
 
-        for (File f : fileList) {
+        try {
 
-            if (f.isFile()) {   // if f is a normal file(not a path for example)
-                // next if statment checks the name and if the
-                // file sufix is .java
-                if (f.getName().endsWith(".java")) {
-                    String format = "%-40s %5d\n";  // defining a format for a
-                    // nice print out
+            for (File f : fileList) {
 
-                    Path path = Paths.get(f.getAbsolutePath()); // get the Absolute path and count rows
-                    long lineCount = Files.lines(path).count();
+                if (f.isFile()) {   // if f is a normal file(not a path for example)
+                    // next if statment checks the name and if the
+                    // file sufix is .java
+                    if (f.getName().endsWith(".java")) {
+                        String format = "%-40s %5d\n";  // defining a format for a
+                        // nice print out
 
-                    System.out.format(format, f.getName(), lineCount);
+                        Path path = Paths.get(f.getAbsolutePath()); // get the Absolute path and count rows
+                        long lineCount = Files.lines(path).count();
+
+                        System.out.format(format, f.getName(), lineCount);
+                    }
+
+                } else {
+                    printAllJavaFiles(f.getAbsoluteFile());
                 }
-
-            } else {
-                printAllJavaFiles(f.getAbsoluteFile());
             }
+        } catch(Exception e) {
+
+            System.err.println("There is something wrong with your url!");
+
         }
     }
 }

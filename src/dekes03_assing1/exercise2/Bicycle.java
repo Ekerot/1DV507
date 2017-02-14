@@ -9,8 +9,8 @@ public class Bicycle extends Vehicle {
 
     private static final int maxPassangers = 1;
     private static final int space = 1;
-    private static double costVehicle = 40;
-    private static double costPassenger = 0;
+    private static final double costVehicle = 40;
+    private static final double costPassenger = 0;
 
     public Bicycle() {
 

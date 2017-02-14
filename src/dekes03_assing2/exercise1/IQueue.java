@@ -21,6 +21,6 @@ public interface IQueue {
 
     String toString();              // return a string representation of the queue content
 
-    Iterator iterator();            // element iterator
+    Iterator<Object> iterator();            // element iterator
 }
 
