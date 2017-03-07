@@ -55,7 +55,7 @@ public class Histogram {
         ArrayList<Integer> temp = new ArrayList<>();
 
         try {
-            File file = new File("dekes03_assing1/exercise6/heltal.dat");
+            File file = new File("heltal.dat");
 
             Scanner scan = new Scanner(file);
 
